@@ -1,6 +1,9 @@
-# Include :download:`map file <map.jinja>` of OS-specific package names and
-# file paths. Values can be overridden using Pillar.
-{%- from "dnsmasq/map.jinja" import dnsmasq with context %}
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+---
+{#- Get the `tplroot` from `tpldir` #}
+{%- set tplroot = tpldir.split("/")[0] %}
+{%- from tplroot ~ "/map.jinja" import mapdata as dnsmasq with context %}
 
 {%- if salt['pillar.get']('dnsmasq:dnsmasq_conf') %}
 dnsmasq_conf:
